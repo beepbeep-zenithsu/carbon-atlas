@@ -18,6 +18,7 @@ import { useAssessment } from '../assessment/AssessmentContext';
 import { CATEGORIES, ALL_SUBSECTIONS, getSubsections } from '../assessment/categoryConfig';
 import { generateComparison } from '../../domain/compare';
 import { generateRecommendations } from '../../domain/recommend';
+import { generateActionPlan } from '../../domain/actionPlan';
 import demoFactors from '../../data/demo/factors.json';
 import projectData from '../../data/project.json';
 import type { ActivityGroup } from '../../domain/types';
@@ -68,6 +69,7 @@ export default function CarbonReport({ reduceMotion = false }: { reduceMotion?: 
     () => (result ? generateRecommendations(result, allFactors as any) : []),
     [result]
   );
+  const actionPlan = useMemo(() => (result ? generateActionPlan(result) : []), [result]);
 
   if (!result) {
     return (
@@ -254,22 +256,12 @@ export default function CarbonReport({ reduceMotion = false }: { reduceMotion?: 
                       Recommended Action Plan
                     </h4>
                     <ul className="space-y-3 text-sm text-[var(--color-ca-text-secondary)]">
-                      <li className="flex gap-2">
-                        <span className="text-[var(--color-ca-lime)] font-bold">1.</span>
-                        <span><strong>Energy Audit:</strong> Conduct a detailed audit of major fuel and electricity consuming equipment (e.g., boilers, generators, sewing machines).</span>
-                      </li>
-                      <li className="flex gap-2">
-                        <span className="text-[var(--color-ca-lime)] font-bold">2.</span>
-                        <span><strong>Renewable Energy:</strong> Explore installing rooftop solar panels to reduce reliance on grid electricity and lower indirect emissions.</span>
-                      </li>
-                      <li className="flex gap-2">
-                        <span className="text-[var(--color-ca-lime)] font-bold">3.</span>
-                        <span><strong>Refrigerant Management:</strong> Implement strict maintenance schedules for HVAC and chillers to minimize fugitive refrigerant leaks.</span>
-                      </li>
-                      <li className="flex gap-2">
-                        <span className="text-[var(--color-ca-lime)] font-bold">4.</span>
-                        <span><strong>Wastewater Treatment:</strong> Capture methane (CH₄) from wastewater treatment for energy generation or flaring to reduce process emissions.</span>
-                      </li>
+                      {actionPlan.map((planItem, idx) => (
+                        <li key={idx} className="flex gap-2">
+                          <span className="text-[var(--color-ca-lime)] font-bold">{idx + 1}.</span>
+                          <span><strong>{planItem.title}:</strong> {planItem.description}</span>
+                        </li>
+                      ))}
                     </ul>
                   </div>
 

@@ -18,7 +18,7 @@ export default function ContactSupport() {
           <Mail className="text-[var(--color-ca-lime)] mt-1" size={20} />
           <div>
             <h3 className="font-semibold text-[var(--color-ca-text-primary)]">Email</h3>
-            <p className="text-sm text-[var(--color-ca-text-secondary)]">support@carbonatlas.com</p>
+            <p className="text-sm text-[var(--color-ca-text-secondary)]">rafiulmicrosoft2025@gmail.com</p>
           </div>
         </div>
 
@@ -26,7 +26,7 @@ export default function ContactSupport() {
           <Phone className="text-[var(--color-ca-lime)] mt-1" size={20} />
           <div>
             <h3 className="font-semibold text-[var(--color-ca-text-primary)]">Phone</h3>
-            <p className="text-sm text-[var(--color-ca-text-secondary)]">+880 1234 567890</p>
+            <p className="text-sm text-[var(--color-ca-text-secondary)]">01814-924640</p>
             <p className="text-xs text-[var(--color-ca-text-secondary)] mt-1">Available: Sunday - Thursday, 9:00 AM - 5:00 PM (BST)</p>
           </div>
         </div>
@@ -35,7 +35,7 @@ export default function ContactSupport() {
           <MapPin className="text-[var(--color-ca-lime)] mt-1" size={20} />
           <div>
             <h3 className="font-semibold text-[var(--color-ca-text-primary)]">Office</h3>
-            <p className="text-sm text-[var(--color-ca-text-secondary)]">Dhaka, Bangladesh</p>
+            <p className="text-sm text-[var(--color-ca-text-secondary)]">IUT, Boardbazar, Gazipur, Dhaka, Bangladesh</p>
           </div>
         </div>
       </div>
