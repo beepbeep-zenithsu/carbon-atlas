@@ -1,0 +1,436 @@
+@import "tailwindcss";
+
+
+@theme {
+
+  --color-ca-main: #050105;
+  --color-ca-panel: #12050A;
+  --color-ca-elevated: #210A14;
+
+
+  /* Liquid Crimson Accent */
+  --color-ca-lime: #FF174F;
+  --color-ca-mint: #FF6B9D;
+
+
+  /* Typography */
+  --color-ca-text-primary: #FFF7FA;
+  --color-ca-text-secondary: #D8AAB8;
+
+
+  /* Status Colors */
+  --color-ca-warning: #FFD166;
+  --color-ca-error: #FF3158;
+
+
+  --font-heading: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+
+}
+
+
+
+/* ================================
+   Ambient Design Tokens
+================================ */
+
+:root {
+
+  --ca-ease:
+    cubic-bezier(0.76,0,0.24,1);
+
+  --ca-ease-o:
+    cubic-bezier(0.22,1,0.36,1);
+
+
+
+  /* Neon Crimson Glow */
+
+  --ca-lime-glow:
+    rgba(255,23,79,0.42);
+
+
+
+  /* Glass Reflections */
+
+  --ca-glass-highlight:
+    rgba(255,255,255,0.18);
+
+
+  --ca-red-glow:
+    rgba(255,23,79,0.45);
+
+
+  --ca-pink-glow:
+    rgba(255,107,157,0.25);
+
+
+  /* Multi-ambient accents — the crimson/glass base stays dominant,
+     these are the "other" hues that show up in aurora blobs and
+     gradient headings so the whole app isn't monochrome red. */
+  --ca-glow-purple:
+    rgba(176,115,255,0.36);
+
+  --ca-glow-teal:
+    rgba(97,220,200,0.32);
+
+  --ca-glow-amber:
+    rgba(255,209,102,0.30);
+
+  --ca-glow-blue:
+    rgba(78,161,255,0.30);
+
+}
+
+
+
+/* ================================
+   Base
+================================ */
+
+@layer base {
+
+
+body {
+
+
+  /* Just the dark base tone here — no colour tint. The coloured wash
+     that used to live on this layer (two big crimson/pink radial
+     blobs) painted identically on every route and was strong enough to
+     drown out AuroraLayer's per-page palette underneath it, so every
+     page ended up looking like the same red/purple background no
+     matter which module/variant was active. AuroraLayer (see
+     AmbientBackdrop.tsx / auroraVariants.ts) is now the only thing
+     responsible for colour, so it actually reads as different — and
+     moving — per page. */
+  background:
+    linear-gradient(
+      145deg,
+      #160008 0%,
+      #050105 45%,
+      #000000 100%
+    );
+
+
+
+  color:
+  var(--color-ca-text-primary);
+
+
+
+  font-family:
+  var(--font-body);
+
+
+
+  -webkit-font-smoothing:
+  antialiased;
+
+
+  -moz-osx-font-smoothing:
+  grayscale;
+
+}
+
+
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+
+  font-family:
+  var(--font-heading);
+
+}
+
+
+
+/* ================================
+   Aurora Red Flow Animation
+================================ */
+
+
+@keyframes ca-aurora-drift {
+
+
+0%,
+100% {
+
+ transform:
+ translate3d(0,0,0)
+ scale(1);
+
+}
+
+
+
+33% {
+
+ transform:
+ translate3d(4%,-3%,0)
+ scale(1.07);
+
+}
+
+
+
+66% {
+
+ transform:
+ translate3d(-3%,4%,0)
+ scale(0.96);
+
+}
+
+
+}
+
+
+/* ================================
+   Multi-hue gradient heading flow
+================================ */
+
+@keyframes ca-gradient-flow {
+
+0%,
+100% {
+  background-position: 0% 50%;
+}
+
+50% {
+  background-position: 100% 50%;
+}
+
+}
+
+
+}
+
+
+
+
+/* ================================
+   Glassmorphism Cards
+================================ */
+
+
+.ca-glass {
+
+
+background:
+
+
+linear-gradient(
+145deg,
+
+rgba(255,255,255,0.14),
+
+rgba(255,23,79,0.12),
+
+rgba(40,0,15,0.35)
+
+);
+
+
+
+border:
+
+1px solid
+rgba(255,120,150,0.25);
+
+
+
+box-shadow:
+
+
+inset 0 1px 1px
+rgba(255,255,255,0.25),
+
+
+
+inset 0 -20px 40px
+rgba(255,23,79,0.08),
+
+
+
+0 20px 60px
+rgba(0,0,0,0.55),
+
+
+
+0 0 35px
+rgba(255,23,79,0.25);
+
+
+
+backdrop-filter:
+
+blur(22px);
+
+
+
+-webkit-backdrop-filter:
+
+blur(22px);
+
+
+}
+
+
+
+
+/* ================================
+   Red Neon Glow Elements
+================================ */
+
+
+.ca-glow {
+
+
+box-shadow:
+
+
+0 0 15px
+rgba(255,23,79,0.75),
+
+
+
+0 0 45px
+rgba(255,23,79,0.45),
+
+
+
+0 0 90px
+rgba(255,23,79,0.20);
+
+
+}
+
+
+
+/* ================================
+   Multi-hue gradient headings
+   Applies to any heading/text that should carry the "multi ambient"
+   look — the same crimson base plus pink/purple/blue/teal sweeping
+   across it. Falls back to a static gradient (no animation) under
+   reduced motion, same as the rest of the ambient system.
+================================ */
+
+.ca-heading-gradient {
+
+  background-image:
+    linear-gradient(
+      100deg,
+      var(--color-ca-lime) 0%,
+      #FF6B9D 22%,
+      #B073FF 46%,
+      #4EA1FF 68%,
+      #61DCC8 88%,
+      var(--color-ca-lime) 100%
+    );
+
+  background-size: 200% auto;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  animation: ca-gradient-flow 9s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ca-heading-gradient {
+    animation: none;
+    background-position: 0% 50%;
+  }
+}
+
+
+
+
+
+/* ================================
+   Cursor
+================================ */
+
+
+@media (hover:hover) and (pointer:fine) {
+
+
+body.ca-cursor-on,
+body.ca-cursor-on * {
+
+
+cursor:none !important;
+
+
+}
+
+
+}
+
+
+
+body.ca-cursor-on .ca-cursor {
+
+
+opacity:1;
+
+
+filter:
+
+
+drop-shadow(
+
+0 0 15px
+rgba(255,23,79,0.9)
+
+);
+
+
+}
+
+
+
+
+body.ca-cursor-hot svg.ca-cursor {
+
+
+width:62px;
+
+height:62px;
+
+margin:-31px 0 0 -31px;
+
+
+}
+
+
+
+
+
+/* ================================
+   Reduced Motion
+================================ */
+
+
+.reduce-motion * {
+
+
+animation-duration:
+0.001ms !important;
+
+
+animation-iteration-count:
+1 !important;
+
+
+transition-duration:
+0.001ms !important;
+
+
+}
