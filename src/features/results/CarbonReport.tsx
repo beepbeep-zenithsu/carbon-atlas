@@ -160,7 +160,7 @@ export default function CarbonReport({ reduceMotion = false }: { reduceMotion?: 
 
           {result.isDemo && (
             <div className="mb-8 p-4 bg-[var(--color-ca-warning)]/10 border border-[var(--color-ca-warning)]/20 rounded-lg text-[var(--color-ca-warning)] text-sm">
-              Used Bitopi Group's emission factors
+              Used Sample Emission factor to illustrate all cells
             </div>
           )}
 

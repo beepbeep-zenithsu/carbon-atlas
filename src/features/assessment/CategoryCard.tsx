@@ -96,25 +96,27 @@ export default function CategoryCard({ category }: { category: CategoryConfig })
           Consumption" (and the equivalent later sections on every other
           module page) was unreachable. */}
       <div className="p-6 md:p-10 overflow-y-auto max-h-[70vh]">
-        <div className="flex items-start justify-between gap-4 mb-6">
-          <div className="flex items-start gap-4">
-            <div className="shrink-0 w-12 h-12 rounded-xl bg-[var(--color-ca-elevated)] flex items-center justify-center text-[var(--color-ca-lime)]">
-              <Icon size={24} />
-            </div>
-            <div>
-              <h2 className="ca-heading-gradient text-2xl font-heading mb-1">{category.title}</h2>
-              <p className="text-sm text-[var(--color-ca-text-secondary)]">{category.description}</p>
-            </div>
+        <div className="flex items-start gap-4 mb-6">
+          <div className="shrink-0 w-12 h-12 rounded-xl bg-[var(--color-ca-elevated)] flex items-center justify-center text-[var(--color-ca-lime)]">
+            <Icon size={24} />
           </div>
-
-          {/* Category banner image — sized as an actual photo, not a
-              passport-sized thumbnail. */}
-          <img
-            src={category.image}
-            alt={category.imageAlt}
-            className="shrink-0 hidden sm:block w-28 h-36 md:w-40 md:h-52 object-cover rounded-xl border border-[#23382D] shadow-[0_8px_24px_rgba(0,0,0,0.5)]"
-          />
+          <div>
+            <h2 className="ca-heading-gradient text-2xl font-heading mb-1">{category.title}</h2>
+            <p className="text-sm text-[var(--color-ca-text-secondary)]">{category.description}</p>
+          </div>
         </div>
+
+        {/* Image floats beside the questions instead of sharing the
+            heading's row — sharing that row was what pushed all the
+            writing down by the image's full height before anything could
+            start. As a float, the first few questions wrap up alongside
+            it and only drop to full width once they run past the image's
+            height. */}
+        <img
+          src={category.image}
+          alt={category.imageAlt}
+          className="hidden sm:block float-right ml-6 mb-6 w-64 h-80 md:w-80 md:h-[26rem] object-cover rounded-xl border border-[#23382D] shadow-[0_8px_24px_rgba(0,0,0,0.5)]"
+        />
 
         {category.subGroups ? (
           <div className="space-y-10">
@@ -137,6 +139,11 @@ export default function CategoryCard({ category }: { category: CategoryConfig })
             {(category.subsections ?? []).map(sub => <SubsectionField key={sub.id} sub={sub} />)}
           </div>
         )}
+
+        {/* Clears the float so the card's own bottom padding doesn't
+            collapse against a tall image when the questions are shorter
+            than it. */}
+        <div className="clear-both" />
       </div>
     </div>
   );
